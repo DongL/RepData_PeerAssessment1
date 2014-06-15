@@ -22,6 +22,7 @@ ggplot(data = daily.steps.sum, aes(x = steps.sum))+
 ```
 
 ![](figure/Q1.png) 
+
 A histogram of total nubmer of daily steps is plotted. The mean and median total number of steps taken each day are 1.0766 &times; 10<sup>4</sup> and 10765 respectively. 
 
 
