@@ -4,7 +4,8 @@ Reproducible Research: Peer Assessment 1
 ```{r settings, include = F, message = F, echo = T}
 opts_chunk$set(dev=c("png"), 
                dev.args=list(type="cairo"),
-               dpi =100, fig.height = 4, fig.width = 6)
+               dpi =100, fig.height = 4, fig.width = 6,
+               bg = "transparent")
 opts_chunk$set(fig.show="hold")
 
 library(ggplot2)
