@@ -27,6 +27,7 @@ ggplot(data = daily.steps.sum, aes(x = steps.sum))+
         geom_histogram(fill = "white" , col = "black")+
         labs(x = "Steps Per Day", title = "Total number of daily steps")
 ```
+
 A histogram of total nubmer of daily steps is plotted. The mean and median total number of steps taken each day are `r mean(daily.steps.sum$steps.sum)` and `r median(daily.steps.sum$steps.sum)` respectively. 
 
 
