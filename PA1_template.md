@@ -1,16 +1,3 @@
-
----
-title: 'Reproducible Research: Peer Assessment 1'
-author: "Dong Liang"
-output:
-  html_document:
-    toc: yes
-  pdf_document:
-    toc: yes
-  word_document:
-    fig_height: 3
-    fig_width: 4
----
 Reproducible Research: Peer Assessment 1
 ========================================================
 
