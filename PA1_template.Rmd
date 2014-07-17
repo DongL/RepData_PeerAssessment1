@@ -1,3 +1,8 @@
+---
+output:
+  html_document:
+    self_contained: no
+---
 Reproducible Research: Peer Assessment 1
 ========================================================
 
