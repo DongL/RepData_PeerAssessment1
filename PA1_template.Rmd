@@ -1,16 +1,33 @@
+
+---
+title: 'Reproducible Research: Peer Assessment 1'
+author: "Dong Liang"
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+  word_document:
+    fig_height: 3
+    fig_width: 4
+---
 Reproducible Research: Peer Assessment 1
 ========================================================
-## Loading and preprocessing the data
-```{r settings, include = F, message = F, echo = T}
-opts_chunk$set(dev=c("png"), 
-               dev.args=list(type="cairo"),
-               dpi =100, fig.height = 4, fig.width = 6,
-               bg = "transparent")
-opts_chunk$set(fig.show="hold")
 
+# Loading and preprocessing the data
+```{r settings, include = F, message = F, echo = T}
 library(ggplot2)
 library(dplyr)
 library(knitr)
+library(Cairo)
+opts_chunk$set(dev=c("png"), 
+               dev.args=list(type="cairo"),
+               dpi =100, fig.height = 4, fig.width = 6,
+               background = "transparent")
+# opts_chunk$set(dev=c("cvg"), 
+#               fig.height = 4, fig.width = 6)
+opts_chunk$set(fig.show="hold")
+
 ```
 
 ```{r data load, message = FALSE, echo = T}
@@ -19,7 +36,7 @@ activity$Date <- as.Date(activity$date, "%Y-%m-%d")
 ```
 
 # What is mean total number of steps taken per day?
-```{r Q1, echo = T, message = FALSE, fig.cap = ""} 
+```{r Q1, echo = T, message = FALSE, fig.cap = "", background = "transparent"} 
 act.complete <- activity[complete.cases(activity),]
 act.complete <- tbl_df(act.complete)
 daily.steps.sum <- group_by(act.complete, Date)%.%
@@ -63,7 +80,6 @@ The average daily acitivty pattern is plotted on the average daily steps against
 
 
 # Imputing missing values
-
 ```{r imputing missing values, echo = T}
 missing.value.N <- sum(is.na(activity$steps))
 missing.value.percentage <- missing.value.N/dim(activity)[1]
@@ -78,9 +94,9 @@ steps.mean.byInterval <- g$steps.mean
 act.with.NA$steps = steps.mean.byInterval
 act.imputed <- rbind(act.complete, act.with.NA)
 ```
+Considering the presence of some amount of missing data coded as NA (n = `r missing.value.N`, constiting `r round(100 * missing.value.percentage, 1)`% of total data) in he dataset, which may lead to biased conclusion, the imputation, which fills in all the missing data, was performed. Briefly, the mean values at the each 5 min interval across the days was chosed to replace the missing values. 
 
-
-```{r histo on imputed dataset, echo = T}
+```{r histo_on_imputed_dataset, echo = T}
 daily.steps.sum.imp <- group_by(act.imputed, Date)%.%
         summarize(steps.sum = sum(steps))
 ggplot(data = daily.steps.sum.imp, aes(x = steps.sum))+ 
@@ -88,7 +104,7 @@ ggplot(data = daily.steps.sum.imp, aes(x = steps.sum))+
         labs(x = "Steps Per Day", title = "Total number of daily steps")
 ```
 
-The mean values at the each 5 min interval across the days was chosed to replace the missing values. After imputation, the adjusted mean and median total number of steps taken each day are `r mean(daily.steps.sum.imp$steps.sum)` and `r median(daily.steps.sum.imp$steps.sum)` respectively. 
+After imputation, the adjusted mean and median total number of steps taken each day are `r mean(daily.steps.sum.imp$steps.sum)` and `r median(daily.steps.sum.imp$steps.sum)` respectively. 
 
 # Are there differnces in activity patterns between weekdays and weekends
 ```{r Q3, echo = T, fig.cap = ""}

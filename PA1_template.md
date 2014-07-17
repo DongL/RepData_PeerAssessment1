@@ -1,6 +1,20 @@
+
+---
+title: 'Reproducible Research: Peer Assessment 1'
+author: "Dong Liang"
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+  word_document:
+    fig_height: 3
+    fig_width: 4
+---
 Reproducible Research: Peer Assessment 1
 ========================================================
-## Loading and preprocessing the data
+
+# Loading and preprocessing the data
 
 
 
@@ -60,7 +74,6 @@ The average daily acitivty pattern is plotted on the average daily steps against
 
 # Imputing missing values
 
-
 ```r
 missing.value.N <- sum(is.na(activity$steps))
 missing.value.percentage <- missing.value.N/dim(activity)[1]
@@ -75,7 +88,7 @@ steps.mean.byInterval <- g$steps.mean
 act.with.NA$steps = steps.mean.byInterval
 act.imputed <- rbind(act.complete, act.with.NA)
 ```
-
+Considering the presence of some amount of missing data coded as NA (n = 2304, constiting 13.1% of total data) in he dataset, which may lead to biased conclusion, the imputation, which fills in all the missing data, was performed. Briefly, the mean values at the each 5 min interval across the days was chosed to replace the missing values. 
 
 
 ```r
@@ -90,9 +103,9 @@ ggplot(data = daily.steps.sum.imp, aes(x = steps.sum))+
 ## stat_bin: binwidth defaulted to range/30. Use 'binwidth = x' to adjust this.
 ```
 
-![plot of chunk histo on imputed dataset](figure/histo on imputed dataset.png) 
+![plot of chunk histo_on_imputed_dataset](figure/histo_on_imputed_dataset.png) 
 
-The mean values at the each 5 min interval across the days was chosed to replace the missing values. After imputation, the adjusted mean and median total number of steps taken each day are 1.0766 &times; 10<sup>4</sup> and 1.0766 &times; 10<sup>4</sup> respectively. 
+After imputation, the adjusted mean and median total number of steps taken each day are 1.0766 &times; 10<sup>4</sup> and 1.0766 &times; 10<sup>4</sup> respectively. 
 
 # Are there differnces in activity patterns between weekdays and weekends
 
